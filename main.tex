@@ -1,0 +1,85 @@
+\documentclass{article}
+
+\input{header}
+
+\title{Compression - Recent Results}
+\author{Meni Sadigurschi}
+\date{August 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{Agnostic Compression}
+\subsection{Definitions}
+
+Let $S = \tagged$ be a sample drawn i.i.d from some unknown distribution $\D$. 
+Let $(\kappa,\rho)$  be a selection scheme
+and denote by $f_S := \rho(\kappa(S))$.
+
+David et. al \cite{david2016supervised} defined the following definition -
+
+\begin{definition}[Agnostic Sample Compression]
+A selection scheme $(\kappa,\rho)$ 
+is an \emph{agnostic sample compression scheme} 
+for $\HH$ if for every sample $S$
+\[ 
+\uf{m}\sum_{i=1}^{m} \abs{f_S (x_i) - y_i} \leq 
+\inf_{h\in\HH} \uf{m}\sum_{i=1}^{m} \abs{h (x_i) - y_i}
+\] 
+\end{definition}
+
+\begin{definition}[$\epsilon$-Approximate Agnostic Compression Scheme] \label{approx-agnos-def}
+A selection scheme $(\kappa,\rho)$ 
+is an \emph{$\epsilon$-Approximate Agnostic Sample Compression Scheme} for $\HH$ 
+if for every sample $S$
+\[ 
+\uf{m}\sum_{i=1}^{m} \abs{f_S (x_i) - y_i} \leq 
+\inf_{h\in\HH} \uf{m}\sum_{i=1}^{m} \abs{h (x_i) - y_i} + \epsilon
+\] 
+\end{definition}
+
+We defined the more strict, and more natural, definition -
+
+\begin{definition}[Uniformly $\epsilon$-Approximate Agnostic Compression Scheme]
+A selection scheme $(\kappa,\rho)$ 
+is an \emph{Uniformly $\epsilon$-Approximate Agnostic Compression Scheme} for $\HH$ 
+if for every sample $S$
+\[ \max_{i\in [m} \abs{f_S (x_i) - y_i} \leq \epsilon \]
+\end{definition}
+
+\subsection{Prior Results}
+
+At section 4.1 on the above paper they prove the following theorem
+
+\begin{theorem*}[Theorem 4.1]
+There is no agnostic sample compression scheme for zero-dimensional linear regression with size $\leq m/2$.
+\end{theorem*}
+
+This impressibility was the motivation to define \ref{approx-agnos-def}. Then they demonstrated that the zero-regression problem have an $\epsilon$-Approximate Agnostic Compression Scheme of size $\bigO{\log(1/\epsilon)/\epsilon}$, by choosing randomly a sub-sample of size $\lceil 1/\epsilon \rceil$ 
+and adding $\bigO{\log(1/\epsilon)/\epsilon}$ bits to encode the sub-sample.
+
+In addition they proved (Theorem 4.2 and 4.3) a connection between $\epsilon$-Approximate Agnostic Compression Scheme and agnostic-learnability.
+
+\subsection{Ours}
+
+With our definition in mind we look at the somewhat similar problem of zero-regression, in other words, compressing the sample so one can approximately recover its mean.
+we prove the following Theorem
+
+\begin{theorem} \label{no-uniform}
+There is no Uniformly $\epsilon$-Approximate Agnostic Compression Scheme for zero-dimensional linear regression with size 
+$ \bigO{\log(\epsilon)} $.
+\end{theorem}
+
+We note that in order to achieve Uniformly $ \bigO{\log(\epsilon)} $-Approximate Agnostic Compression 
+one can just take as side-information the representation of the approximate mean  (as a floating point).
+In that light \ref{no-uniform} meaning is that no non-trivial Uniformly approximate compression scheme exist for this problem.
+
+\section{Covering numbers}
+
+\section{Future Directions}
+
+\bibliographystyle{unsrt}
+\bibliography{general}
+
+\end{document}
