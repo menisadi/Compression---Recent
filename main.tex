@@ -41,11 +41,33 @@ if for every sample $S$
 
 We defined the more strict, and more natural, definition -
 
+\begin{definition}[Uniformly $\epsilon$-Approximate Compression Scheme]
+A selection scheme $(\kappa,\rho)$ 
+is an \emph{Uniformly $\epsilon$-Approximate Compression Scheme} for $\HH$ 
+if for every sample $S$
+\[ \max_{i\in [m} \abs{f_S (x_i) - y_i} \leq \epsilon \]
+\end{definition}
+
+The intuitive way to go from this to the agnostic case would be
+
 \begin{definition}[Uniformly $\epsilon$-Approximate Agnostic Compression Scheme]
 A selection scheme $(\kappa,\rho)$ 
 is an \emph{Uniformly $\epsilon$-Approximate Agnostic Compression Scheme} for $\HH$ 
 if for every sample $S$
-\[ \max_{i\in [m} \abs{f_S (x_i) - y_i} \leq \epsilon \]
+\[ \max_{i\in [m} \abs{f_S (x_i) - y_i} 
+\leq \inf_{h\in\HH} \max_{i\in [m} \abs{h (x_i) - y_i} + \epsilon \]
+\end{definition}
+
+or maybe 
+
+\begin{definition}[Uniformly $\epsilon$-Approximate Agnostic Compression Scheme]
+A selection scheme $(\kappa,\rho)$ 
+is an \emph{Uniformly $\epsilon$-Approximate Agnostic Compression Scheme} for $\HH$ 
+if for every sample $S$
+\[ \max_{i\in [m} \{
+    \abs{f_S (x_i) - y_i} - \inf_{h\in\HH} \abs{h (x_i) - y_i} 
+    \}
+\leq \epsilon \]
 \end{definition}
 
 \subsection{Prior Results}
